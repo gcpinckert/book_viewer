@@ -12,8 +12,13 @@
     <h2 class="content-subhead">Results for '<%= params[:query]%>'</h2>
 
     <ul>
-      <% @matches.each do |chap_num, chap_title| %>
-        <li><a href="/chapters/<%= chap_num %>"><%= chap_title %></a></li>
+      <% @matches.each do |title, data| %>
+        <h4><%= title %></h4>
+          <ul>
+            <% data[:paragraphs].each do |id, paragraph| %>
+              <li><a href="/chapters/<%= data[:num] %>#<%= id %>"><%= bold_search_terms(params[:query], paragraph) %></a>
+            <% end %>
+          </ul>
       <% end %>
     </ul>
   <% end %>
